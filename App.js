@@ -1,11 +1,17 @@
-import * as React from 'react';
+import React from 'react';
+import AppProvider from './AppContext'
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 import HomeScreen from './src/screens/HomeScreen';
 import DetailScreen from './src/screens/DetailScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/auths/LoginScreen';
 import RegisterScreen from './src/screens/auths/RegisterScreen';
+import AddRecipeScreen from './src/screens/AddRecipeScreen';
+import ChatScreen from './src/screens/ChatScreen';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -13,7 +19,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function Home() {
+function Main() {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -56,8 +62,8 @@ function Home() {
         }}
       />
       <Tab.Screen
-        name="Login"
-        component={LoginScreen}
+        name="AddRecipe"
+        component={AddRecipeScreen}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <Icon name="plus-square" size={size} color={color} />;
@@ -65,8 +71,8 @@ function Home() {
         }}
       />
       <Tab.Screen
-        name="Register"
-        component={RegisterScreen}
+        name="Chat"
+        component={ChatScreen}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <Icon name="comment" size={size} color={color} />;
@@ -88,19 +94,20 @@ function Home() {
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }}/>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
 
-        <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          options={{ headerShown: false }}/>
-        <Stack.Screen name="Detail" component={DetailScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="Home"
+            component={Main}
+            options={{ headerShown: false }} />
+          <Stack.Screen name="Detail" component={DetailScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 }
 

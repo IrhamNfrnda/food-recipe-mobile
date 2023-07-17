@@ -1,15 +1,10 @@
 import React from 'react';
-import {Text, Button, Avatar} from 'react-native-paper';
-import {
-  View,
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, Button, Avatar } from 'react-native-paper';
+import { View, ImageBackground, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 
-function DetailScreen({navigation}) {
+function DetailScreen({ navigation, route }) {
+  const { recipe } = route.params || {};
 
   const [type, setType] = React.useState('ingredients');
 
@@ -28,7 +23,7 @@ function DetailScreen({navigation}) {
             // backgroundColor: 'gray',
           }}>
           <ImageBackground
-            source={require('../assets/images/BananaLemonilo.png')}
+            source={{ uri: recipe.recipe_picture }}
             resizeMode="cover"
             style={{
               height: '100%',
@@ -41,13 +36,13 @@ function DetailScreen({navigation}) {
               position: 'absolute',
               top: 0,
             }}>
-            <View style={{position: 'absolute', top: 20, marginLeft: 20}}>
+            <View style={{ position: 'absolute', top: 20, marginLeft: 20 }}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon name="arrowleft" size={30} color="#fff" />
               </TouchableOpacity>
             </View>
 
-            <View style={{marginBottom: 25, padding: 20}}>
+            <View style={{ marginBottom: 25, padding: 20 }}>
               <Text
                 variant="titleLarge"
                 style={{
@@ -55,11 +50,11 @@ function DetailScreen({navigation}) {
                   fontSize: 30,
                   marginBottom: 2,
                   textShadowColor: 'rgba(0, 0, 0, 0.75)',
-                  textShadowOffset: {width: -1, height: 1},
+                  textShadowOffset: { width: -1, height: 1 },
                   textShadowRadius: 10,
                 }}
                 numberOfLines={1}>
-                Banana Lemonilo
+                { recipe.title }
               </Text>
               <Text
                 style={{
@@ -88,7 +83,7 @@ function DetailScreen({navigation}) {
             padding: 20,
           }}>
           {/* Button Switch */}
-          <View style={{flexDirection: 'row', marginBottom: 20}}>
+          <View style={{ flexDirection: 'row', marginBottom: 20 }}>
             <Button
               labelStyle={
                 type === 'ingredients'
@@ -110,25 +105,14 @@ function DetailScreen({navigation}) {
           <ScrollView>
             {/* Ingridients View */}
             {type === 'ingredients' ? (
-              <View
-                style={{
-                  backgroundColor: '#FAF7ED',
-                  borderRadius: 10,
-                  padding: 20,
-                }}>
-                <Text>
-                  - 2 slices whole-grain bread (bakery-fresh recommended) {'\n'}
-                  - 1 tablespoon hummus {'\n'}- 2 slices tomato - 1/2 small
-                  cucumber, thinly sliced lengthwise {'\n'}- 1 slice low-fat
-                  cheese
-                </Text>
+              <View style={{ backgroundColor: '#FAF7ED', borderRadius: 10, padding: 20 }}>
+                <Text>{recipe.ingredients}</Text>
               </View>
             ) : (
               <>
                 {/* Video Step View */}
-                {[...new Array(5)].map((item, key) => (
+                {
                   <View
-                    key={key}
                     style={{
                       flexDirection: 'row',
                       backgroundColor: '#FAF7ED',
@@ -141,17 +125,17 @@ function DetailScreen({navigation}) {
                     <Avatar.Image
                       size={60}
                       source={require('../assets/images/play_icon.png')}
-                      style={{borderRadius: 20, backgroundColor: '#efc81a'}}
+                      style={{ borderRadius: 20, backgroundColor: '#efc81a' }}
                     />
 
                     <View>
-                      <Text style={{fontSize: 18, color: '#B6B6B6'}}>
-                        Step 1
+                      <Text style={{ fontSize: 18, color: '#B6B6B6' }}>
+                        Video Step
                       </Text>
-                      <Text>Boil eggs for 3 minutes</Text>
+                      <Text>{recipe.video_link}</Text>
                     </View>
                   </View>
-                ))}
+                }
               </>
             )}
           </ScrollView>
@@ -170,7 +154,7 @@ const styles = StyleSheet.create({
 
     fontSize: 16,
   },
-  buttonNonActive: {color: '#666666', fontSize: 16},
+  buttonNonActive: { color: '#666666', fontSize: 16 },
 });
 
 export default DetailScreen;

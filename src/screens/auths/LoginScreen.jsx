@@ -1,14 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, ScrollView, View, Image, Text, TextInput, Pressable, TouchableHighlight } from 'react-native';
+import { AppContext } from '../../../AppContext';
+import axios from 'axios';
+import SweetAlert from 'react-native-sweet-alert';
 
 function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [isEmailActive, setIsEmailActive] = useState(false);
   const [isPasswordActive, setIsPasswordActive] = useState(false);
+  const { setToken, setUser } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputEmailStyle = isEmailActive ? styles.inputActive : styles.input;
   const inputPasswordStyle = isPasswordActive ? styles.inputActive : styles.input;
+
+  const handleLogin = () => {
+    setIsLoading(true);
+
+    axios
+      .post('https://rich-blue-shrimp-wig.cyclic.app/auth/login', {
+        email: email,
+        password: password,
+      })
+      .then(response => {
+        setIsLoading(false);
+
+        // // Login success
+        setToken(response.data.data.token);
+        setUser(response.data.data.user);
+        
+        // Redirect to the desired screen
+        navigation.navigate('Home');
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.error('Error:', error);
+        // // Handle the error, show an alert message, etc.
+        SweetAlert.showAlertWithOptions({
+          title: 'Error',
+          subTitle: 'Email or password is incorrect',
+          confirmButtonTitle: 'OK',
+          confirmButtonColor: '#EFC81A',
+          style: 'error',
+        });
+      });
+  };
+  
+
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -40,7 +79,7 @@ function LoginScreen({ navigation }) {
             placeholder="Password"
           />
           <View style={styles.buttonContainer}>
-            <TouchableHighlight underlayColor="white" style={styles.buttonHighlight} onPress={() => navigation.navigate('Home')}>
+            <TouchableHighlight underlayColor="white" style={styles.buttonHighlight} onPress={handleLogin}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>LOG IN</Text>
               </View>
@@ -56,6 +95,11 @@ function LoginScreen({ navigation }) {
           </View>
         </View>
       </View>
+      {/* {isLoading && (
+        <View style={styles.loadingOverlay}>
+          <SweetAlert showLoading={true} />
+        </View>
+      )} */}
     </ScrollView>
   );
 }
@@ -132,6 +176,12 @@ const styles = StyleSheet.create({
   },
   signUpLink: {
     color: '#EFC81A',
+  },
+  loadingOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

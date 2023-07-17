@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  Image,
-  TouchableHighlight,
-} from 'react-native';
+import { StyleSheet, ScrollView, View, Text, TextInput, Pressable, TouchableHighlight } from 'react-native';
+import axios from 'axios';
+import SweetAlert from 'react-native-sweet-alert';
 
 function RegisterScreen({ navigation }) {
   const [name, setName] = useState('');
@@ -24,11 +17,52 @@ function RegisterScreen({ navigation }) {
   const inputPasswordStyle = activeInput === 'password' ? styles.inputActive : styles.input;
   const inputConfirmPasswordStyle = activeInput === 'confirmPassword' ? styles.inputActive : styles.input;
 
+  const handleRegister = () => {
+    if (password !== confirmPassword) {
+      SweetAlert.showAlertWithOptions({
+        title: 'Error',
+        subTitle: 'Password and Confirm Password do not match',
+        confirmButtonTitle: 'OK',
+        confirmButtonColor: '#EFC81A',
+        style: 'error',
+      });
+      return;
+    }
+
+    axios
+      .post('https://rich-blue-shrimp-wig.cyclic.app/auth/register', {
+        email: email,
+        fullname: name,
+        phoneNumber: phone,
+        password: password,
+      })
+      .then(response => {
+        SweetAlert.showAlertWithOptions({
+          title: 'Success',
+          subTitle: 'Registration successful',
+          confirmButtonTitle: 'OK',
+          confirmButtonColor: '#EFC81A',
+          style: 'success',
+        });
+        navigation.navigate('Login');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        SweetAlert.showAlertWithOptions({
+          title: 'Error',
+          subTitle: 'Registration failed',
+          confirmButtonTitle: 'OK',
+          confirmButtonColor: '#EFC81A',
+          style: 'error',
+        });
+      });
+  };
+
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>Let’s Get Started !</Text>
+          <Text style={styles.headerTitle}>Let’s Get Started!</Text>
           <Text>Create a new account to access all features</Text>
         </View>
         <View style={styles.formContainer}>
@@ -70,7 +104,7 @@ function RegisterScreen({ navigation }) {
             placeholder="Confirm New Password"
           />
           <View style={styles.buttonContainer}>
-            <TouchableHighlight underlayColor="white" style={styles.buttonHighlight}>
+            <TouchableHighlight underlayColor="white" style={styles.buttonHighlight} onPress={handleRegister}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>CREATE</Text>
               </View>

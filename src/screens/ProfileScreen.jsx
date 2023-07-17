@@ -1,23 +1,47 @@
-import React from 'react';
-import { 
-  StyleSheet, 
-  ScrollView, 
-  View, 
-  Image, 
-  Text 
+import React, { useContext } from 'react';
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Image,
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/dist/FontAwesome';
+import { AppContext } from '../../AppContext';
 
 function ProfileScreen({ navigation }) {
+  const { token, setToken, user } = useContext(AppContext);
+
+  React.useEffect(() => {
+    if (!token) {
+      // Redirect to login screen if token is not defined
+      navigation.navigate('Login');
+    }
+
+  }, []);
+
+  const handleLogout = () => {
+    // Clear token and reset state
+    setToken(null);
+
+    // Navigate to the login screen
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
+  };
+
+
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
         <Image
-          source={require('../assets/images/Mareta.png')}
+          source={{ uri: user ? user.profile_picture : 'https://res.cloudinary.com/dv4s7dbf2/image/upload/v1684265819/default_photo_m6iphg.webp' }}
           style={styles.profileIcon}
         />
-        <Text style={styles.profileName}>Mareta Lopeda</Text>
+        <Text style={styles.profileName}>{user?.fullname}</Text>
       </View>
       <View style={styles.profileCard}>
         <View style={styles.list}>
@@ -48,12 +72,14 @@ function ProfileScreen({ navigation }) {
           </View>
           <Icon name="angle-right" size={24} color="#8C8C8C" />
         </View>
-        <View style={styles.list}>
-          <View style={styles.listItem}>
-            <Icon2 name="sign-out" size={24} color="#EEC242" />
-            <Text style={styles.listItemText}>Log Out</Text>
+        <TouchableOpacity onPress={handleLogout}>
+          <View style={styles.list}>
+            <View style={styles.listItem}>
+              <Icon2 name="sign-out" size={24} color="#EEC242" />
+              <Text style={styles.listItemText}>Log Out</Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

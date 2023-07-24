@@ -17,6 +17,8 @@ The Food Recipe App Mobile project is built using the following technologies:
 
 ## Project Repository 📂🔗
 
+The frontend repository for this project can be found on GitHub at the following link:
+[Food Recipe Frontend Repository](https://github.com/IrhamNfrnda/food-recipe-fe-react)
 The backend repository for this project can be found on GitHub at the following link:
 [Food Recipe Backend Repository](https://github.com/IrhamNfrnda/food-recipe-be)
 

@@ -1,79 +1,61 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Food Recipe App Mobile Portfolio 📱🍳🥗
 
-# Getting Started
+## Project Description 🚀
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+"Food Recipe" is a mobile app built with React Native. Users can share and discover a variety of recipes, creating a community-driven platform for culinary enthusiasts on the go. Whether you're looking to try new dishes or showcase your own creations, Food Recipe App Mobile has got you covered!
 
-## Step 1: Start the Metro Server
+## Technologies Used 💻🛠️
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+The Food Recipe App Mobile project is built using the following technologies:
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- JavaScript
+- React Native
+- Redux (State management)
+- React Navigation (Navigation library for React Native)
+- Express (Backend framework)
+- Node.Js (JavaScript runtime)
 
-```bash
-# using npm
-npm start
+## Project Repository 📂🔗
 
-# OR using Yarn
-yarn start
-```
+The backend repository for this project can be found on GitHub at the following link:
+[Food Recipe Backend Repository](https://github.com/IrhamNfrnda/food-recipe-be)
 
-## Step 2: Start your Application
+## Features ✨🍔🍰
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- User authentication and account management
+- Recipe sharing and posting
+- Recipe discovery through search and categories
+- Like, comment, and favorite recipes
+- User profile and activity tracking
+- Smooth navigation with React Navigation
+- State management with Redux
+- Server-side logic with Express and Node.Js
 
-### For Android
+## Getting Started 🏁🚀
 
-```bash
-# using npm
-npm run android
+To set up the Food Recipe App Mobile project locally, follow these steps:
 
-# OR using Yarn
-yarn android
-```
+1. Clone the backend repository from the provided link.
+2. Install the required dependencies using npm.
+3. Set up your database and update the configuration accordingly.
+4. Ensure you have Node.js and npm installed on your system.
+5. Start the server using the command `npm start`.
+6. Clone the frontend repository for the mobile app (if available).
+7. Install the required dependencies using npm or yarn.
+8. Run the app on an emulator or a physical device using `react-native run-android` or `react-native run-ios`.
 
-### For iOS
+## Contributions 🤝🌟
 
-```bash
-# using npm
-npm run ios
+Contributions to the Food Recipe App Mobile project are welcome. If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request in the backend repository.
 
-# OR using Yarn
-yarn ios
-```
+## License 📜📝
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Contact 📞📧
 
-## Step 3: Modifying your App
+If you have any questions or inquiries regarding this project, feel free to contact me at [irhamnfrnda@gmail.com](mailto:irhamnfrnda@gmail.com).
 
-Now that you have successfully run the app, let's modify it.
+---
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Thank you for exploring the Food Recipe App Mobile portfolio. Enjoy cooking and discovering new recipes with the community! 🍽️👩‍🍳👨‍🍳

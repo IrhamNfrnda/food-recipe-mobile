@@ -31,6 +31,20 @@ The backend repository for this project can be found on GitHub at the following 
 - State management with Redux
 - Server-side logic with Express and Node.Js
 
+## Screenshots 📸
+
+<table>
+   <tr>
+    <td><img width="350px" src="./screenshot/login.png" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/register.png" border="0"  alt="Register" /></td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./screenshot/home.png" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/detail.png" border="0"  alt="Register" /></td>
+  </tr>
+</table>
+
+
 ## Getting Started 🏁🚀
 
 To set up the Food Recipe App Mobile project locally, follow these steps:

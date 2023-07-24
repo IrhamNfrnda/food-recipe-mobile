@@ -38,7 +38,7 @@ function ProfileScreen({ navigation }) {
     <ScrollView>
       <View style={styles.headerContainer}>
         <Image
-          source={{ uri: user ? user.profile_picture : 'https://res.cloudinary.com/dv4s7dbf2/image/upload/v1684265819/default_photo_m6iphg.webp' }}
+          source={require("../assets/images/Real.png")}
           style={styles.profileIcon}
         />
         <Text style={styles.profileName}>{user?.fullname}</Text>

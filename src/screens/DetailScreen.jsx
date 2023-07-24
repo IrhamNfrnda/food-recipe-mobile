@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Button, Avatar } from 'react-native-paper';
-import { View, ImageBackground, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 
 function DetailScreen({ navigation, route }) {
@@ -54,9 +54,9 @@ function DetailScreen({ navigation, route }) {
                   textShadowRadius: 10,
                 }}
                 numberOfLines={1}>
-                { recipe.title }
+                {recipe.title}
               </Text>
-              <Text
+              {/* <Text
                 style={{
                   fontSize: 11,
                   fontWeight: 100,
@@ -65,7 +65,7 @@ function DetailScreen({ navigation, route }) {
                 }}
                 numberOfLines={1}>
                 By Chef Ronald Humson
-              </Text>
+              </Text> */}
             </View>
           </ImageBackground>
         </View>
@@ -112,29 +112,31 @@ function DetailScreen({ navigation, route }) {
               <>
                 {/* Video Step View */}
                 {
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      backgroundColor: '#FAF7ED',
-                      padding: 10,
-                      borderRadius: 15,
-                      alignItems: 'center',
-                      gap: 25,
-                      marginBottom: 15,
-                    }}>
-                    <Avatar.Image
-                      size={60}
-                      source={require('../assets/images/play_icon.png')}
-                      style={{ borderRadius: 20, backgroundColor: '#efc81a' }}
-                    />
+                  <TouchableOpacity onPress={() => Linking.openURL(recipe.video_link)}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        backgroundColor: '#FAF7ED',
+                        padding: 10,
+                        borderRadius: 15,
+                        alignItems: 'center',
+                        gap: 25,
+                        marginBottom: 15,
+                      }}>
+                      <Avatar.Image
+                        size={60}
+                        source={require('../assets/images/play_icon.png')}
+                        style={{ borderRadius: 20, backgroundColor: '#efc81a' }}
+                      />
 
-                    <View>
-                      <Text style={{ fontSize: 18, color: '#B6B6B6' }}>
-                        Video Step
-                      </Text>
-                      <Text>{recipe.video_link}</Text>
+                      <View>
+                        <Text style={{ fontSize: 18, color: '#B6B6B6' }}>
+                          Video
+                        </Text>
+                        <Text>Click for video step</Text>
+                      </View>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 }
               </>
             )}

@@ -63,7 +63,7 @@ function Home({ navigation }) {
         {/* New Recipes */}
         <View style={styles.sectionContainer}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>New Recipes</Text>
+            <Text style={styles.sectionTitle}>Category</Text>
             <Text style={styles.sectionLink}>More info</Text>
           </View>
 

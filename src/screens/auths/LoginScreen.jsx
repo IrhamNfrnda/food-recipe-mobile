@@ -35,7 +35,7 @@ function LoginScreen({ navigation }) {
       })
       .catch(error => {
         setIsLoading(false);
-        console.error('Error:', error);
+        // console.error('Error:', error);
         // // Handle the error, show an alert message, etc.
         SweetAlert.showAlertWithOptions({
           title: 'Error',
@@ -60,6 +60,11 @@ function LoginScreen({ navigation }) {
           <Text style={styles.title}>Welcome!</Text>
           <Text>Log in to your existing account.</Text>
         </View>
+         {/* {isLoading && (
+        <View style={styles.loadingOverlay}>
+          <SweetAlert showLoading={true} />
+        </View>
+      )} */}
         <View style={styles.formContainer}>
           <TextInput
             style={inputEmailStyle}
@@ -95,11 +100,6 @@ function LoginScreen({ navigation }) {
           </View>
         </View>
       </View>
-      {/* {isLoading && (
-        <View style={styles.loadingOverlay}>
-          <SweetAlert showLoading={true} />
-        </View>
-      )} */}
     </ScrollView>
   );
 }

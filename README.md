@@ -41,8 +41,16 @@ The Android Application for this project can be found on GitHub at the following
 
 <table>
    <tr>
+    <td>Login Page</td>
+    <td>Register Page</td>
+  </tr>
+   <tr>
     <td><img width="350px" src="./screenshot/login.png" border="0" alt="Login" /></td>
     <td> <img width="350px" src="./screenshot/register.png" border="0"  alt="Register" /></td>
+  </tr>
+   <tr>
+    <td>Home Page</td>
+    <td>Detail Page</td>
   </tr>
   <tr>
     <td><img width="350px" src="./screenshot/home.png" border="0" alt="Login" /></td>

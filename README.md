@@ -23,6 +23,9 @@ The frontend repository for this project can be found on GitHub at the following
 The backend repository for this project can be found on GitHub at the following link:
 [Food Recipe Backend Repository](https://github.com/IrhamNfrnda/food-recipe-be)
 
+The Android Application for this project can be found on GitHub at the following link:
+[Food Recipe Application](https://github.com/IrhamNfrnda/Food-Recipe-App/releases/download/V1.0.0/app-debug.apk)
+
 ## Features ✨🍔🍰
 
 - User authentication and account management

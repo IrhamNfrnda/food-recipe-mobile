@@ -8,10 +8,12 @@ import { AppContext } from '../../AppContext';
 function SearchScreen({ navigation, route }) {
     const { user } = useContext(AppContext);
     const { searchKeyword, searchMode } = route.params; 
+    const [title, setTitle] = useState('');
     const [searchResult, setSearchResult] = useState([]);
 
     useEffect(() => {
         if (searchMode === 'search') {
+            setTitle('Search Result')
             axios
                 .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe`, {
                     params: {
@@ -26,6 +28,7 @@ function SearchScreen({ navigation, route }) {
                     console.error("Error searching recipes:", error);
                 });
         } else if (searchMode === 'myRecipes') {
+            setTitle('My Recipes')
             axios
                 .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe/user/${user.id}`)
                 .then((response) => {
@@ -45,7 +48,7 @@ function SearchScreen({ navigation, route }) {
                     <Icon name="chevron-left" size={24} color="#EFC81A" />
                 </TouchableOpacity>
                 <View style={{ flex: 1, alignItems: 'center' }}>
-                    <Text style={styles.headerTitle}>List Recipe</Text>
+                    <Text style={styles.headerTitle}>{ title }</Text>
                 </View>
             </View>
 

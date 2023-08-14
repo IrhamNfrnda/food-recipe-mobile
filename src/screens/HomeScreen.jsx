@@ -1,14 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ScrollView, StyleSheet, View, ImageBackground, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, View, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import { Searchbar, Text, Avatar, Card } from 'react-native-paper';
 import axios from 'axios';
 import { AppContext } from '../../AppContext';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Home({ navigation }) {
   const { recipes, setRecipes } = useContext(AppContext);
+  const [recipesNew, setRecipesNew]  = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
+
+  const handleSubmitSearch = () => {
+    if (searchQuery !== '') {
+      navigation.navigate('ListRecipe', { searchKeyword: searchQuery, searchMode: 'search' });
+    } else {
+      Alert.alert('Please enter a search keyword');
+    }
+  };
+
+
 
   useEffect(() => {
     console.log(recipes);
@@ -21,7 +33,21 @@ function Home({ navigation }) {
       })
       .catch(error => {
         console.error('Error:', error);
-        // Handle the error, show a message, etc.
+      });
+
+    axios
+      .get('https://rich-blue-shrimp-wig.cyclic.app/recipe', {
+        params: {
+          sort: 'asc',
+        },
+      })
+      .then(response => {
+        const { data } = response.data;
+        data.shift();
+        setRecipesNew(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
   }, []);
 
@@ -33,7 +59,13 @@ function Home({ navigation }) {
           onChangeText={onChangeSearch}
           value={searchQuery}
           style={styles.searchbar}
+          icon={() => (
+            <TouchableOpacity onPress={handleSubmitSearch}>
+              <Icon name="magnify" size={24} color="#6D61F2" />
+            </TouchableOpacity>
+          )}
         />
+
 
         {/* Popular Recipes */}
         <View style={styles.sectionContainer}>
@@ -109,7 +141,7 @@ function Home({ navigation }) {
           <Text style={styles.sectionTitle}>New Recipes</Text>
 
           <ScrollView horizontal>
-            {recipes.map((item, key) => (
+            {recipesNew.map((item, key) => (
               <Card style={styles.popularRecipeCard} key={key}>
                 <TouchableOpacity
                   key={key}

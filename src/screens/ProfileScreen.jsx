@@ -19,7 +19,6 @@ function ProfileScreen({ navigation }) {
       // Redirect to login screen if token is not defined
       navigation.navigate('Login');
     }
-
   }, []);
 
   const handleLogout = () => {
@@ -38,19 +37,26 @@ function ProfileScreen({ navigation }) {
     <ScrollView>
       <View style={styles.headerContainer}>
         <Image
-          source={require("../assets/images/Real.png")}
+          source={{ uri: user?.profile_picture }}
           style={styles.profileIcon}
         />
         <Text style={styles.profileName}>{user?.fullname}</Text>
       </View>
       <View style={styles.profileCard}>
-        <View style={styles.list}>
-          <View style={styles.listItem}>
-            <Icon name="user" size={24} color="#EEC242" />
-            <Text style={styles.listItemText}>Edit Profile</Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('EditProfile')}
+        >
+          <View style={styles.list}>
+            <View style={styles.listItem}>
+              <Icon name="user" size={24} color="#EEC242" />
+              <Text style={styles.listItemText}>Edit Profile</Text>
+            </View>
+            <Icon name="angle-right" size={24} color="#8C8C8C" />
           </View>
-          <Icon name="angle-right" size={24} color="#8C8C8C" />
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ListRecipe', { searchMode: 'myRecipes' })}
+        >
         <View style={styles.list}>
           <View style={styles.listItem}>
             <Icon name="award" size={25} color="#EEC242" />
@@ -58,6 +64,7 @@ function ProfileScreen({ navigation }) {
           </View>
           <Icon name="angle-right" size={24} color="#8C8C8C" />
         </View>
+        </TouchableOpacity>
         <View style={styles.list}>
           <View style={styles.listItem}>
             <Icon name="bookmark" size={24} color="#EEC242" />

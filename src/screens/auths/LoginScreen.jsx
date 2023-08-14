@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, ScrollView, View, Image, Text, TextInput, Pressable, TouchableHighlight } from 'react-native';
+import { StyleSheet, ScrollView, View, Image, Text, TextInput, Pressable, TouchableHighlight, Alert } from 'react-native';
 import { AppContext } from '../../../AppContext';
 import axios from 'axios';
 import SweetAlert from 'react-native-sweet-alert';
@@ -26,24 +26,19 @@ function LoginScreen({ navigation }) {
       .then(response => {
         setIsLoading(false);
 
+        Alert.alert('Success', 'Login Success');
+
         // // Login success
         setToken(response.data.data.token);
         setUser(response.data.data.user);
         
         // Redirect to the desired screen
-        navigation.navigate('Home');
+        navigation.navigate('Main');
       })
       .catch(error => {
         setIsLoading(false);
-        // console.error('Error:', error);
-        // // Handle the error, show an alert message, etc.
-        SweetAlert.showAlertWithOptions({
-          title: 'Error',
-          subTitle: 'Email or password is incorrect',
-          confirmButtonTitle: 'OK',
-          confirmButtonColor: '#EFC81A',
-          style: 'error',
-        });
+
+        Alert.alert('Failed', 'Email or password is incorrect');
       });
   };
   
@@ -146,7 +141,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#eee',
     borderColor: '#EFC81A',
-    color: '#EFC81A',
+    color: 'black'
   },
   buttonContainer: {
     margin: 12,

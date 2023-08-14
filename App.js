@@ -11,6 +11,8 @@ import LoginScreen from './src/screens/auths/LoginScreen';
 import RegisterScreen from './src/screens/auths/RegisterScreen';
 import AddRecipeScreen from './src/screens/AddRecipeScreen';
 import ChatScreen from './src/screens/ChatScreen';
+import ListRecipeScreen from './src/screens/ListRecipeScreen';
+import EditProfileScreen from './src/screens/EditProfileScreen';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
@@ -96,15 +98,17 @@ function App() {
   return (
     <AppProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Main'>
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
 
           <Stack.Screen
-            name="Home"
+            name="Main"
             component={Main}
             options={{ headerShown: false }} />
           <Stack.Screen name="Detail" component={DetailScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="ListRecipe" component={ListRecipeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>

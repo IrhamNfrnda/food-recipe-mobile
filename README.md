@@ -17,8 +17,14 @@ The Food Recipe App Mobile project is built using the following technologies:
 
 ## Project Repository 📂🔗
 
+The frontend repository for this project can be found on GitHub at the following link:
+[Food Recipe Frontend Repository](https://github.com/IrhamNfrnda/food-recipe-fe-react)
+
 The backend repository for this project can be found on GitHub at the following link:
 [Food Recipe Backend Repository](https://github.com/IrhamNfrnda/food-recipe-be)
+
+The Android Application for this project can be found on GitHub at the following link:
+[Food Recipe Application](https://github.com/IrhamNfrnda/Food-Recipe-App/releases)
 
 ## Features ✨🍔🍰
 
@@ -30,6 +36,28 @@ The backend repository for this project can be found on GitHub at the following 
 - Smooth navigation with React Navigation
 - State management with Redux
 - Server-side logic with Express and Node.Js
+
+## Screenshots 📸
+
+<table>
+   <tr>
+    <td>Login Page</td>
+    <td>Register Page</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="./screenshot/login.png" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/register.png" border="0"  alt="Register" /></td>
+  </tr>
+   <tr>
+    <td>Home Page</td>
+    <td>Detail Page</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./screenshot/home.png" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/detail.png" border="0"  alt="Register" /></td>
+  </tr>
+</table>
+
 
 ## Getting Started 🏁🚀
 

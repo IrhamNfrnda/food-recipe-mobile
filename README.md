@@ -39,7 +39,56 @@ The Android Application for this project can be found on GitHub at the following
 
 ## Screenshots 📸
 
-
+<table>
+   <tr>
+    <td>Login Page</td>
+    <td>Register Page</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="./screenshot/login.png" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/register.png" border="0"  alt="Register" /></td>
+  </tr>
+   <tr>
+    <td>Home Page</td>
+    <td>Detail Page</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./screenshot/home.png" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/detail.png" border="0"  alt="Register" /></td>
+  </tr>
+<tr>
+    <td>Profile Page</td>
+    <td>Detail Page</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./screenshot/profile.png" border="0" alt="Profile" /></td>
+    <td> <img width="350px" src="./screenshot/edit_profile.png" border="0"  alt="Edit Profile" /></td>
+  </tr>
+   <tr>
+    <td>Add Recipe Page</td>
+    <td>Chat Page</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./screenshot/add_recipe.png" border="0" alt="Profile" /></td>
+    <td> <img width="350px" src="./screenshot/chat.png" border="0"  alt="Edit Profile" /></td>
+  </tr>
+   <tr>
+    <td>Search Page</td>
+    <td>My Recipe Page</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./screenshot/search.png" border="0" alt="Profile" /></td>
+    <td> <img width="350px" src="./screenshot/my_recipe.png" border="0"  alt="Edit Profile" /></td>
+  </tr>
+ <tr>
+    <td>Liked Recipe Page</td>
+    <td>Saved Page</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="./screenshot/liked.png" border="0" alt="Profile" /></td>
+    <td> <img width="350px" src="./screenshot/saved.png" border="0"  alt="Edit Profile" /></td>
+  </tr>
+</table>
 
 
 ## Getting Started 🏁🚀

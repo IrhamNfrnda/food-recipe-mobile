@@ -15,7 +15,7 @@ function PopularRecipeCard(props) {
                     </View>
                     <View style={styles.detailsContainer}>
                         <Text style={styles.recipeTitle}>{recipe?.title}</Text>
-                        <Text style={styles.recipeCategory}>category</Text>
+                        <Text style={styles.recipeCategory}>{recipe?.category}</Text>
                     </View>
                 </View>
             </TouchableRipple>

@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Home({ navigation }) {
   const { recipes, setRecipes } = useContext(AppContext);
-  const [recipesNew, setRecipesNew]  = useState([]);
+  const [recipesNew, setRecipesNew] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
@@ -20,10 +20,35 @@ function Home({ navigation }) {
     }
   };
 
+  const categories = [
+    "Main Dish",
+    "Snack",
+    "Dessert",
+    "Salad",
+    "Beverage",
+    "Breakfast",
+  ];
 
+  const getIconNameForCategory = (category) => {
+    switch (category) {
+      case 'Main Dish':
+        return 'food';
+      case 'Snack':
+        return 'hamburger';
+      case 'Dessert':
+        return 'cupcake';
+      case 'Salad':
+        return 'carrot';
+      case 'Beverage':
+        return 'coffee';
+      case 'Breakfast':
+        return 'bread-slice';
+      default:
+        return 'food';
+    }
+  };
 
   useEffect(() => {
-    console.log(recipes);
     axios
       .get('https://rich-blue-shrimp-wig.cyclic.app/recipe?limit=9&page=1')
       .then(response => {
@@ -51,6 +76,19 @@ function Home({ navigation }) {
       });
   }, []);
 
+  // Function to filter recipes based on category
+  const onPressCategory = (category) => {
+    const filteredRecipes = recipes.filter(recipe => recipe.category === category);
+    // console.log(filteredRecipes);
+    console.log('Category Clicked')
+    console.log(category)
+    navigation.navigate('ListRecipe', {
+      recipes: filteredRecipes,
+      category,
+      searchMode: 'category',
+    });
+  };
+
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.container}>
@@ -61,7 +99,7 @@ function Home({ navigation }) {
           style={styles.searchbar}
           icon={() => (
             <TouchableOpacity onPress={handleSubmitSearch}>
-              <Icon name="magnify" size={24} color="#6D61F2" />
+              <Icon name="magnify" size={24} color="#EEC302" />
             </TouchableOpacity>
           )}
         />
@@ -96,43 +134,26 @@ function Home({ navigation }) {
         <View style={styles.sectionContainer}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Category</Text>
-            <Text style={styles.sectionLink}>More info</Text>
           </View>
 
-          <View style={styles.recipeCategoryContainer}>
-            <View style={styles.recipeCategory}>
-              <Avatar.Image
-                size={80}
-                source={require('../assets/images/SoupIcon.png')}
-                style={styles.recipeCategoryAvatar}
-              />
-              <Text style={styles.recipeCategoryTitle}>Soup</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.recipeCategoryContainer}>
+              {categories.map((category, key) => (
+                <View style={styles.recipeCategory} key={key}>
+                  <TouchableOpacity onPress={() => onPressCategory(category)}>
+                    <Icon
+                      name={getIconNameForCategory(category)} // Implement a function to map category to icon name
+                      size={50}
+                      color="white"
+                      style={styles.recipeCategoryAvatar}
+                    />
+                    <Text style={styles.recipeCategoryTitle}>{category}</Text>
+                  </TouchableOpacity>
+                </View>
+              ))}
             </View>
-            <View style={styles.recipeCategory}>
-              <Avatar.Image
-                size={80}
-                source={require('../assets/images/ChickenIcon.png')}
-                style={styles.recipeCategoryAvatar}
-              />
-              <Text style={styles.recipeCategoryTitle}>Chicken</Text>
-            </View>
-            <View style={styles.recipeCategory}>
-              <Avatar.Image
-                size={80}
-                source={require('../assets/images/SeafoodIcon.png')}
-                style={styles.recipeCategoryAvatar}
-              />
-              <Text style={styles.recipeCategoryTitle}>Seafood</Text>
-            </View>
-            <View style={styles.recipeCategory}>
-              <Avatar.Image
-                size={80}
-                source={require('../assets/images/DesertIcon.png')}
-                style={styles.recipeCategoryAvatar}
-              />
-              <Text style={styles.recipeCategoryTitle}>Dessert</Text>
-            </View>
-          </View>
+          </ScrollView>
+
         </View>
         {/* End of New Recipes */}
 
@@ -153,7 +174,7 @@ function Home({ navigation }) {
                   <Card.Content style={styles.popularRecipeCardContent}>
                     <Text style={styles.popularRecipeCardTitle}>{item.title}</Text>
                     <Text style={styles.popularRecipeCardBody} numberOfLines={1}>
-                      Beef steak with nopales, tartare ....
+                      {item.category}
                     </Text>
                   </Card.Content>
                 </TouchableOpacity>
@@ -218,10 +239,12 @@ const styles = StyleSheet.create({
   },
   recipeCategory: {
     alignItems: 'center',
+    marginEnd: 10,
   },
   recipeCategoryAvatar: {
     borderRadius: 20,
-    backgroundColor: '#57ce96',
+    padding: 10,
+    backgroundColor: '#EFC81A',
   },
   recipeCategoryTitle: {
     textAlign: 'center',

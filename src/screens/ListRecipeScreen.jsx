@@ -6,40 +6,87 @@ import RecipeCard from '../components/RecipeCard';
 import { AppContext } from '../../AppContext';
 
 function SearchScreen({ navigation, route }) {
-    const { user } = useContext(AppContext);
-    const { searchKeyword, searchMode } = route.params; 
+    const { token, user } = useContext(AppContext);
+    const { searchKeyword, searchMode, recipes, category } = route.params;
     const [title, setTitle] = useState('');
     const [searchResult, setSearchResult] = useState([]);
 
     useEffect(() => {
-        if (searchMode === 'search') {
-            setTitle('Search Result')
-            axios
-                .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe`, {
-                    params: {
-                        keyword: searchKeyword,
-                    },
-                })
-                .then((response) => {
-                    const data = response?.data?.data;
-                    setSearchResult(data.slice(1));
-                })
-                .catch((error) => {
-                    console.error("Error searching recipes:", error);
-                });
-        } else if (searchMode === 'myRecipes') {
-            setTitle('My Recipes')
-            axios
-                .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe/user/${user.id}`)
-                .then((response) => {
-                    const data = response?.data?.data;
-                    setSearchResult(data.slice(1));
-                })
-                .catch((error) => {
-                    console.error("Error fetching user's recipes:", error);
-                });
+        switch (searchMode) {
+            case 'search':
+                setTitle('Search Result');
+                axios
+                    .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe`, {
+                        params: {
+                            keyword: searchKeyword,
+                        },
+                    })
+                    .then((response) => {
+                        const data = response?.data?.data;
+                        setSearchResult(data.slice(1));
+                    })
+                    .catch((error) => {
+                        console.error("Error searching recipes:", error);
+                    });
+                break;
+
+            case 'myRecipes':
+                setTitle('My Recipes');
+                axios
+                    .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe/user/${user.id}`)
+                    .then((response) => {
+                        const data = response?.data?.data;
+                        setSearchResult(data.slice(1));
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching user's recipes:", error);
+                    });
+                break;
+
+            case 'savedRecipes':
+                setTitle('Saved Recipes');
+                axios
+                    .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe/saved`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((response) => {
+                        const data = response?.data?.data;
+                        setSearchResult(data);
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching user's recipes:", error);
+                    });
+                break;
+
+            case 'likedRecipes':
+                setTitle('Liked Recipes');
+                axios
+                    .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe/liked`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((response) => {
+                        const data = response?.data?.data;
+                        setSearchResult(data);
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching user's recipes:", error);
+                    });
+                break;
+
+            case 'category':
+                setSearchResult(recipes);
+                setTitle(category);
+                break;
+
+            default:
+                break;
         }
     }, [searchKeyword, searchMode]);
+
 
     return (
         <>
@@ -48,7 +95,7 @@ function SearchScreen({ navigation, route }) {
                     <Icon name="chevron-left" size={24} color="#EFC81A" />
                 </TouchableOpacity>
                 <View style={{ flex: 1, alignItems: 'center' }}>
-                    <Text style={styles.headerTitle}>{ title }</Text>
+                    <Text style={styles.headerTitle}>{title}</Text>
                 </View>
             </View>
 

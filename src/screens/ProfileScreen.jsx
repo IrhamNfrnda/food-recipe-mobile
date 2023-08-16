@@ -65,6 +65,9 @@ function ProfileScreen({ navigation }) {
           <Icon name="angle-right" size={24} color="#8C8C8C" />
         </View>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ListRecipe', { searchMode: 'savedRecipes' })}
+        >
         <View style={styles.list}>
           <View style={styles.listItem}>
             <Icon name="bookmark" size={24} color="#EEC242" />
@@ -72,6 +75,10 @@ function ProfileScreen({ navigation }) {
           </View>
           <Icon name="angle-right" size={24} color="#8C8C8C" />
         </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ListRecipe', { searchMode: 'likedRecipes' })}
+        >
         <View style={styles.list}>
           <View style={styles.listItem}>
             <Icon name="thumbs-up" size={24} color="#EEC242" />
@@ -79,6 +86,7 @@ function ProfileScreen({ navigation }) {
           </View>
           <Icon name="angle-right" size={24} color="#8C8C8C" />
         </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={handleLogout}>
           <View style={styles.list}>
             <View style={styles.listItem}>

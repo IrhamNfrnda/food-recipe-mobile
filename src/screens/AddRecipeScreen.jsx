@@ -4,15 +4,26 @@ import { TextInput, Button, Title } from 'react-native-paper';
 import axios from 'axios';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { AppContext } from '../../AppContext';
+import { SelectList } from 'react-native-dropdown-select-list'
 import Icon from 'react-native-vector-icons/dist/Feather';
 
 const AddRecipeScreen = ({ navigation }) => {
   const [recipeTitle, setRecipeTitle] = useState('');
+  const [category, setCategory] = React.useState('');
   const [ingredients, setIngredients] = useState('');
   const [videoLink, setVideoLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const { token, user } = useContext(AppContext);
+  const { token, user, setRecipes } = useContext(AppContext);
+
+  const categories = [
+    { key: '1', value: 'Main Dish' },
+    { key: '2', value: 'Snack' },
+    { key: '3', value: 'Dessert' },
+    { key: '4', value: 'Salad' },
+    { key: '5', value: 'Beverage' },
+    { key: '6', value: 'Breakfast' },
+  ]
 
 
   const handleSubmit = () => {
@@ -21,6 +32,7 @@ const AddRecipeScreen = ({ navigation }) => {
     const formData = new FormData();
     formData.append('recipePicture', selectedImage);
     formData.append('title', recipeTitle);
+    formData.append('category', category);
     formData.append('ingredients', ingredients);
     formData.append('userId', user.id);
     formData.append('videoLink', videoLink);
@@ -39,6 +51,10 @@ const AddRecipeScreen = ({ navigation }) => {
         setIngredients('');
         setVideoLink('');
         setSelectedImage(null);
+
+        const newRecipe = response?.data?.data[0];
+        console.log(newRecipe);
+        setRecipes(prevRecipes => [newRecipe, ...prevRecipes]);
 
         Alert.alert(
           'Success',
@@ -96,6 +112,16 @@ const AddRecipeScreen = ({ navigation }) => {
         style={styles.input}
         outlineColor='#EFC81A'
         activeOutlineColor='#EFC81A'
+      />
+      <SelectList
+        style={styles.input}
+        setSelected={(val) => setCategory(val)}
+        data={categories}
+        boxStyles={{
+          borderColor: '#EFC81A',
+          borderRadius: 2,
+        }}
+        save="value"
       />
       <TextInput
         label="Ingredients"

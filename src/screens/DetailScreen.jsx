@@ -15,13 +15,12 @@ function DetailScreen({ navigation, route }) {
   const [type, setType] = useState('ingredients');
 
   useEffect(() => {
-    console.log(recipe.slug)
     const currentSlug = recipe.slug;
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
     // Fetch current recipe using axios
     axios.get(`https://rich-blue-shrimp-wig.cyclic.app/recipe/detail/${currentSlug}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: headers,
     })
       .then((result) => {
         setComments(result.data?.data?.comments)
@@ -36,9 +35,9 @@ function DetailScreen({ navigation, route }) {
   }, []);
 
   const handleLikeButton = () => {
-    if (!user) {
-      Alert.alert(
-        'Error',
+    if (!user.id) {
+      return Alert.alert(
+        'Failed',
         'Please login first to like',
         [{ text: 'OK', onPress: () => { } }],
         { cancelable: false }
@@ -59,7 +58,7 @@ function DetailScreen({ navigation, route }) {
         })
         .catch((error) => {
           Alert.alert(
-            'Error',
+            'Failed',
             'Failed to like recipe',
             [{ text: 'OK', onPress: () => { } }],
             { cancelable: false }
@@ -80,7 +79,7 @@ function DetailScreen({ navigation, route }) {
         })
         .catch((error) => {
           Alert.alert(
-            'Error',
+            'Failed',
             'Failed to unlike recipe',
             [{ text: 'OK', onPress: () => { } }],
             { cancelable: false }
@@ -90,8 +89,8 @@ function DetailScreen({ navigation, route }) {
   };
 
   const handleSaveButton = () => {
-    if (!user) {
-      Alert.alert(
+    if (!user.id) {
+      return Alert.alert(
         'Error',
         'Please login first to save',
         [{ text: 'OK', onPress: () => { } }],
@@ -113,7 +112,7 @@ function DetailScreen({ navigation, route }) {
         })
         .catch((error) => {
           Alert.alert(
-            'Error',
+            'Failed',
             'Failed to save recipe',
             [{ text: 'OK', onPress: () => { } }],
             { cancelable: false }
@@ -133,7 +132,7 @@ function DetailScreen({ navigation, route }) {
         })
         .catch((error) => {
           Alert.alert(
-            'Error',
+            'Failed',
             'Failed to unsave recipe',
             [{ text: 'OK', onPress: () => { } }],
             { cancelable: false }

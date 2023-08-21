@@ -32,11 +32,12 @@ function SearchScreen({ navigation, route }) {
 
             case 'myRecipes':
                 setTitle('My Recipes');
+                console.log(user.id)
                 axios
                     .get(`https://rich-blue-shrimp-wig.cyclic.app/recipe/user/${user.id}`)
                     .then((response) => {
-                        const data = response?.data?.data;
-                        setSearchResult(data.slice(1));
+                        const data = response?.data?.data ? response?.data?.data : [] ;
+                        setSearchResult(data);
                     })
                     .catch((error) => {
                         console.error("Error fetching user's recipes:", error);
@@ -54,6 +55,7 @@ function SearchScreen({ navigation, route }) {
                     .then((response) => {
                         const data = response?.data?.data;
                         setSearchResult(data);
+                        console.log(data)
                     })
                     .catch((error) => {
                         console.error("Error fetching user's recipes:", error);
@@ -92,7 +94,7 @@ function SearchScreen({ navigation, route }) {
         <>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Icon name="chevron-left" size={24} color="#EFC81A" />
+                    <Icon name="chevron-left" padding={5} size={24} color="#EFC81A" />
                 </TouchableOpacity>
                 <View style={{ flex: 1, alignItems: 'center' }}>
                     <Text style={styles.headerTitle}>{title}</Text>

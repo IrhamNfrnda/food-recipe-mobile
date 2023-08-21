@@ -9,6 +9,7 @@ function Home({ navigation }) {
   const { recipes, setRecipes } = useContext(AppContext);
   const [recipesNew, setRecipesNew] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const onChangeSearch = query => setSearchQuery(query);
 
@@ -55,26 +56,31 @@ function Home({ navigation }) {
         const { data } = response.data;
         data.shift();
         setRecipes(data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error:', error);
+        setIsLoading(false);
       });
 
     axios
       .get('https://rich-blue-shrimp-wig.cyclic.app/recipe', {
         params: {
-          sort: 'asc',
+          sort: 'desc',
         },
       })
       .then(response => {
         const { data } = response.data;
         data.shift();
         setRecipesNew(data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error:', error);
+        setIsLoading(false);
       });
-  }, []);
+      
+  }, [isLoading]);
 
   // Function to filter recipes based on category
   const onPressCategory = (category) => {
@@ -97,6 +103,7 @@ function Home({ navigation }) {
           onChangeText={onChangeSearch}
           value={searchQuery}
           style={styles.searchbar}
+          onSubmitEditing={handleSubmitSearch}
           icon={() => (
             <TouchableOpacity onPress={handleSubmitSearch}>
               <Icon name="magnify" size={24} color="#EEC302" />
@@ -108,7 +115,7 @@ function Home({ navigation }) {
         {/* Popular Recipes */}
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Popular Recipes</Text>
-          <Text style={styles.sectionSubtitle}>Popular check</Text>
+          <Text style={styles.sectionSubtitle}>Check this out most liked recipes</Text>
           <ScrollView horizontal>
             {recipes.map((item, key) => (
               <TouchableOpacity
@@ -160,6 +167,7 @@ function Home({ navigation }) {
         {/* Popular For You */}
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>New Recipes</Text>
+          <Text style={styles.sectionSubtitle}>Keep updated with new recipes</Text>
 
           <ScrollView horizontal>
             {recipesNew.map((item, key) => (

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, StyleSheet, Image, ScrollView, Alert } from 'react-native';
 import { TextInput, Button, Title } from 'react-native-paper';
 import axios from 'axios';
@@ -15,6 +15,19 @@ const AddRecipeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const { token, user, setRecipes } = useContext(AppContext);
+
+  useEffect(() => {
+    if (!token) {
+      // Redirect to login screen if token is not defined
+      navigation.navigate('Login');
+    }
+  }, []);
+
+  if (!token) {
+    // If token is not defined, don't render the screen
+    return null;
+  }
+
 
   const categories = [
     { key: '1', value: 'Main Dish' },

@@ -12,7 +12,7 @@ import Icon2 from 'react-native-vector-icons/dist/FontAwesome';
 import { AppContext } from '../../AppContext';
 
 function ProfileScreen({ navigation }) {
-  const { token, setToken, user } = useContext(AppContext);
+  const { token, setToken, user, setUser } = useContext(AppContext);
 
   React.useEffect(() => {
     if (!token) {
@@ -24,6 +24,7 @@ function ProfileScreen({ navigation }) {
   const handleLogout = () => {
     // Clear token and reset state
     setToken(null);
+    setUser(null);
 
     // Navigate to the login screen
     navigation.reset({
@@ -32,6 +33,10 @@ function ProfileScreen({ navigation }) {
     });
   };
 
+  if (!token) {
+    // If token is not defined, don't render the screen
+    return null;
+  }
 
   return (
     <ScrollView>

@@ -41,7 +41,7 @@ function LoginScreen({ navigation }) {
         Alert.alert('Failed', 'Email or password is incorrect');
       });
   };
-  
+
 
 
   return (
@@ -55,7 +55,7 @@ function LoginScreen({ navigation }) {
           <Text style={styles.title}>Welcome!</Text>
           <Text>Log in to your existing account.</Text>
         </View>
-         {/* {isLoading && (
+        {/* {isLoading && (
         <View style={styles.loadingOverlay}>
           <SweetAlert showLoading={true} />
         </View>

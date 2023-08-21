@@ -1,16 +1,30 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback, useEffect, useContext} from 'react';
 import {GiftedChat, Bubble} from 'react-native-gifted-chat';
 import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import EmojiSelector from 'react-native-emoji-selector';
 import {Keyboard} from 'react-native';
-import {Appbar} from 'react-native-paper';
+import { AppContext } from '../../AppContext';
 
-export default function ChatScreen(props) {
+export default function ChatScreen({ navigation }) {
     const [messages, setMessages] = useState([]);
     const [showEmoji, setShowEmoji] = useState(false);
     const [text, setText] = useState('');
     const [user, setUser] = useState(null);
+    const { token } = useContext(AppContext);
+
+
+    useEffect(() => {
+      if (!token) {
+        // Redirect to login screen if token is not defined
+        navigation.navigate('Login');
+      }
+    }, []);
+  
+    if (!token) {
+      // If token is not defined, don't render the screen
+      return null;
+    }
   
     useEffect(() => {
       setMessages([
